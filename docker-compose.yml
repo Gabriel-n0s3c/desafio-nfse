@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./nfse-api
+    container_name: desafio_nfse_api
+    restart: always
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mariadb://host.docker.internal:3306/desafio_nfse_db
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: 
+    ports:
+      - "8080:8080"
+
+  # frontend:
+  #   build: ./nfse-estatico
+  #   container_name: nfse-estatico
+  #   restart: always
+  #   ports:
+  #     - "80:80"
+  #   depends_on:
+  #     - backend
+
+
