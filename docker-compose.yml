@@ -9,17 +9,15 @@ services:
        - DB_URL=${DB_URL}
        - DB_USER=${DB_USERNAME}
        - DB_PASSWORD=${DB_PASSWORD}
-      
     ports:
       - "8080:8080"
 
-  # frontend:
-  #   build: ./nfse-estatico
-  #   container_name: nfse-estatico
-  #   restart: always
-  #   ports:
-  #     - "80:80"
-  #   depends_on:
-  #     - backend
-
+  frontend:
+    build: ./nfse-estatico
+    container_name: nfse-estatico
+    restart: always
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
 

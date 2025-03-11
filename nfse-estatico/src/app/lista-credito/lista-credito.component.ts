@@ -86,8 +86,6 @@ export class ListaCreditoComponent implements OnInit {
   }
 
   private buscarPeloNumeroCredito(numero: string): void {
-    console.log("aqui 1", numero);
-
     this.listaService.buscarPeloNumeroCredito(numero).subscribe({
       next: (data) => this.tratarRespostaConsulta(data),
       error: (error) => this.tratarErro(error),
@@ -96,9 +94,6 @@ export class ListaCreditoComponent implements OnInit {
   private tratarRespostaConsulta(
     response: RespostaConsultaCreditoModel | RespostaConsultaCreditoModel[]
   ): void {
-
-    console.log("aqui");
-    
     if (!response || (Array.isArray(response) && response.length === 0)) {
       this.mostrarMensagem(
         'error',
