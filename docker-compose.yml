@@ -6,9 +6,10 @@ services:
     container_name: desafio_nfse_api
     restart: always
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mariadb://host.docker.internal:3306/desafio_nfse_db
-      SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: 
+       - DB_URL=${DB_URL}
+       - DB_USER=${DB_USERNAME}
+       - DB_PASSWORD=${DB_PASSWORD}
+      
     ports:
       - "8080:8080"
 
