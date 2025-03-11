@@ -26,7 +26,7 @@ public class CreditoService {
     }
 
     public CreditoResponseDTO detalharCredito(String numeroCredito) {
-        return creditoRepository.findByNumeroCredito(numeroCredito).map(creditoMapper::toDto).orElse(new CreditoResponseDTO());
+        return creditoRepository.findByNumeroCredito(numeroCredito).map(creditoMapper::toDto).orElse(null);
     }
 }
 
