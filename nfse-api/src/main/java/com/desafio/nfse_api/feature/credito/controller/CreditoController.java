@@ -20,4 +20,10 @@ public class CreditoController {
         return ResponseEntity.ok(creditos);
     }
 
+    @GetMapping("/credito/{numeroCredito}")
+    public ResponseEntity<CreditoResponseDTO> detalharCredito(@PathVariable String numeroCredito) {
+        CreditoResponseDTO credito = creditoService.detalharCredito(numeroCredito);
+        return ResponseEntity.ok(credito);
+    }
+
 }

@@ -18,12 +18,15 @@ public class CreditoService {
     @Autowired
     private CreditoRepository creditoRepository;
 
-
     public List<CreditoResponseDTO> listarCreditosByNfse(String numeroNfse) {
         List<Credito> creditos = creditoRepository.findAllByNumeroNfse(numeroNfse);
         return creditos.stream()
                 .map(creditoMapper::toDto)
                 .collect(Collectors.toList());
+    }
+
+    public CreditoResponseDTO detalharCredito(String numeroCredito) {
+        return creditoRepository.findByNumeroCredito(numeroCredito).map(creditoMapper::toDto).orElse(new CreditoResponseDTO());
     }
 }
 
