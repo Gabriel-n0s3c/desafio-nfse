@@ -88,7 +88,7 @@ class CreditoServiceTest {
 
         CreditoResponseDTO response = creditoService.detalharCredito("67890");
 
-        assertNotNull(response);
+        assertNull(response);
 
         verify(creditoRepository, times(1)).findByNumeroCredito("67890");
         verify(creditoMapper, never()).toDto(any(Credito.class));
