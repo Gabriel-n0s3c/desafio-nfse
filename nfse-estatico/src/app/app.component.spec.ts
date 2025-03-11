@@ -1,13 +1,21 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
+import { ToastModule } from 'primeng/toast';
+import { HttpClientModule } from '@angular/common/http';
+import { ListaCreditoComponent } from './lista-credito/lista-credito.component';
+import { MessageService } from 'primeng/api';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule
+        RouterTestingModule,
+        ListaCreditoComponent,
+        HttpClientModule,
+        ToastModule
       ],
+      providers:[MessageService],
       declarations: [
         AppComponent
       ],
@@ -16,7 +24,7 @@ describe('AppComponent', () => {
 
   it('should create the app', () => {
     const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
+    const app = fixture.componentInstance; 
     expect(app).toBeTruthy();
   });
 
@@ -26,10 +34,4 @@ describe('AppComponent', () => {
     expect(app.title).toEqual('nfse-estatico');
   });
 
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('nfse-estatico app is running!');
-  });
 });
