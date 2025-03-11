@@ -5,6 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ListaCreditoComponent } from './lista-credito/lista-credito.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ToastModule } from 'primeng/toast'; 
+import { MessageService } from 'primeng/api';
 
 @NgModule({
   declarations: [
@@ -14,9 +16,10 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     AppRoutingModule,
     ListaCreditoComponent,
-    HttpClientModule  
+    HttpClientModule,
+    ToastModule
   ],
-  providers: [],
+  providers: [MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
