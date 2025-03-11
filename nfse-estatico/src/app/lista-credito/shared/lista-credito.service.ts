@@ -11,11 +11,11 @@ export class ListaCreditoService {
   
   constructor(private http: HttpClient) {}
 
-  getCreditos(numeroNfse: string): Observable<Array<RespostaConsultaCreditoModel>> {
+  buscarPeloNumeroNFSe(numeroNfse: string): Observable<Array<RespostaConsultaCreditoModel>> {
     return this.http.get<Array<RespostaConsultaCreditoModel>>(`${this.apiUrl}/${numeroNfse}`);
   }
 
-  getDetalharCredito(numeroCredito: string): Observable<RespostaConsultaCreditoModel> {
+  buscarPeloNumeroCredito(numeroCredito: string): Observable<RespostaConsultaCreditoModel> {
     return this.http.get<RespostaConsultaCreditoModel>(`${this.apiUrl}/credito/${numeroCredito}`);
   }
 }

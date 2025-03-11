@@ -6,7 +6,6 @@ import { FormsModule } from '@angular/forms';
 import { TableModule } from 'primeng/table';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { DialogModule } from 'primeng/dialog';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MessageService } from 'primeng/api';
 import { RespostaConsultaCreditoModel } from './shared/reposta-consulta-credito.model';
 
@@ -16,7 +15,6 @@ const [TIPO_CONSULTA_NFSE, TIPO_CONSULTA_CREDITO] = [1, 2];
   standalone: true,
   imports: [
     CommonModule,
-    BrowserAnimationsModule,
     ButtonModule,
     FormsModule,
     TableModule,
@@ -81,14 +79,16 @@ export class ListaCreditoComponent implements OnInit {
   }
 
   private buscarPeloNumeroNFSe(numero: string): void {
-    this.listaService.getCreditos(numero).subscribe({
+    this.listaService.buscarPeloNumeroNFSe(numero).subscribe({
       next: (data) => this.tratarRespostaConsulta(data),
       error: (error) => this.tratarErro(error),
     });
   }
 
   private buscarPeloNumeroCredito(numero: string): void {
-    this.listaService.getDetalharCredito(numero).subscribe({
+    console.log("aqui 1", numero);
+
+    this.listaService.buscarPeloNumeroCredito(numero).subscribe({
       next: (data) => this.tratarRespostaConsulta(data),
       error: (error) => this.tratarErro(error),
     });
@@ -96,6 +96,9 @@ export class ListaCreditoComponent implements OnInit {
   private tratarRespostaConsulta(
     response: RespostaConsultaCreditoModel | RespostaConsultaCreditoModel[]
   ): void {
+
+    console.log("aqui");
+    
     if (!response || (Array.isArray(response) && response.length === 0)) {
       this.mostrarMensagem(
         'error',
