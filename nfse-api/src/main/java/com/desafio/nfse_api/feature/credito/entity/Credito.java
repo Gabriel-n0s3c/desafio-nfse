@@ -8,6 +8,7 @@ import java.time.LocalDate;
 
 @Entity
 @Getter
+@Setter
 @Table(name = "credito")
 public class Credito {
 
