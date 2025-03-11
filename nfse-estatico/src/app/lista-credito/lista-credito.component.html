@@ -1,1 +1,137 @@
-<p>lista-credito works!</p>
+<div class="container mt-4">
+  <div class="card shadow-lg rounded">
+    <div
+      class="card-header bg-primary text-white d-flex justify-content-between align-items-center"
+    >
+      <h3 class="card-title">Consulta de NFS-e ou Crédito</h3>
+
+      <i
+        class="pi pi-info-circle p-mr-2 p-text-light p-overlay-icon"
+        (click)="exibirAjuda()"
+        style="cursor: pointer"
+      ></i>
+    </div>
+
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-12 mb-3">
+          <label class="font-weight-bold">Escolha o tipo de consulta</label>
+          <p-selectButton
+            [options]="stateOptions"
+            [(ngModel)]="tipoConsulta"
+            optionLabel="label"
+            optionValue="value"
+            class="w-100"
+          ></p-selectButton>
+        </div>
+
+        <div class="col-md-12 mb-3">
+          <div class="form-group">
+            <label for="numero" class="font-weight-bold">Digite o número</label>
+            <input
+              type="number"
+              class="form-control"
+              id="numero"
+              placeholder="Digite o número"
+              [(ngModel)]="numero"
+              min="0"
+              minlength="6"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-end">
+        <button
+          class="btn btn-danger px-4 py-2 me-2 font-weight-bold"
+          (click)="limparCampos()"
+        >
+          <i class="pi pi-trash"></i> Limpar
+        </button>
+        <button
+          class="btn btn-success px-4 py-2 font-weight-bold"
+          (click)="pesquisar()"
+        >
+          <i class="pi pi-search"></i> Pesquisar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="creditos.length > 0" class="mt-4">
+    <div class="card shadow-lg rounded">
+      <div class="card-header bg-secondary text-white">
+        <h3 class="card-title">Resultados da Consulta</h3>
+      </div>
+      <div class="card-body">
+        <p-table
+          [value]="creditos"
+          [responsive]="true"
+          [paginator]="true"
+          [rows]="5"
+          class="p-datatable-gridlines"
+        >
+          <ng-template pTemplate="header">
+            <tr>
+              <th>Numero Crédito</th>
+              <th>Numero NFS-e</th>
+              <th>Data de Constituição</th>
+              <th>Valor ISSQN</th>
+              <th>Aliquota</th>
+              <th>Base Cálculo</th>
+              <th>Simples Nacional</th>
+              <th>Tipo de Crédito</th>
+              <th>Valor Dedução</th>
+              <th>Valor Faturado</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-item>
+            <tr>
+              <td>{{ item.numeroCredito }}</td>
+              <td>{{ item.numeroNfse }}</td>
+              <td>{{ item.dataConstituicao | date : "dd/MM/yyyy" }}</td>
+              <td>{{ item.valorIssqn | currency : "BRL" }}</td>
+              <td>{{ item.aliquota }}%</td>
+              <td>{{ item.baseCalculo | currency : "BRL" }}</td>
+              <td>{{ item.simplesNacional }}</td>
+              <td>{{ item.tipoCredito }}</td>
+              <td>{{ item.valorDeducao | currency : "BRL" }}</td>
+              <td>{{ item.valorFaturado | currency : "BRL" }}</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p-dialog
+  header="Ajuda"
+  [dismissableMask]="true"
+  [(visible)]="mostrarAjuda"
+  [modal]="true"
+  [closable]="true"
+  [style]="{ width: '80vw', maxWidth: '600px' }"
+  [draggable]="false"
+  [resizable]="false"
+  [responsive]="true"
+  [breakpoint]="767"
+>
+  <div>
+    <h5><strong>Tipos de Consulta:</strong></h5>
+    <ul>
+      <li>
+        <strong>NFS-e</strong>: Permite consultar a NFS-e (Nota Fiscal de
+        Serviços Eletrônica) usando o número da NFS-e.
+      </li>
+      <li>
+        <strong>Crédito</strong>: Permite consultar os detalhes do crédito
+        associado ao número informado.
+      </li>
+    </ul>
+    <p>
+      Escolha um tipo de consulta e insira o número correspondente para realizar
+      a pesquisa.
+    </p>
+  </div>
+</p-dialog>

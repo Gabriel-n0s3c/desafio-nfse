@@ -1,15 +1,21 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { RespostaConsultaCreditoModel } from './reposta-consulta-credito.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ListaCreditoService {
   private apiUrl = 'http://localhost:8080/api/creditos';
+  
   constructor(private http: HttpClient) {}
 
-  getCreditos(numeroNfse: string = "7891011"): Observable<any> {
-    return this.http.get(`${this.apiUrl}/${numeroNfse}`);
+  getCreditos(numeroNfse: string): Observable<Array<RespostaConsultaCreditoModel>> {
+    return this.http.get<Array<RespostaConsultaCreditoModel>>(`${this.apiUrl}/${numeroNfse}`);
+  }
+
+  getDetalharCredito(numeroCredito: string): Observable<RespostaConsultaCreditoModel> {
+    return this.http.get<RespostaConsultaCreditoModel>(`${this.apiUrl}/credito/${numeroCredito}`);
   }
 }
