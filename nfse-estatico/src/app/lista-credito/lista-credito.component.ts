@@ -102,6 +102,8 @@ export class ListaCreditoComponent implements OnInit {
       );
       return;
     }
+    
+    this.creditos = [];
 
     if (Array.isArray(response)) {
       this.creditos = response;
