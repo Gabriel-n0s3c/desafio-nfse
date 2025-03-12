@@ -2,16 +2,20 @@ package com.desafio.nfse_api.feature.credito.controller;
 
 import com.desafio.nfse_api.feature.credito.entity.Credito;
 import com.desafio.nfse_api.feature.credito.repository.CreditoRepository;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.DynamicPropertyRegistry;
+import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
+import org.testcontainers.containers.KafkaContainer;
+import org.testcontainers.utility.DockerImageName;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -25,6 +29,19 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 class CreditoControllerIntegracaoTest {
 
+    private static final KafkaContainer kafkaContainer =
+            new KafkaContainer(DockerImageName.parse("confluentinc/cp-kafka:latest"));
+
+    @BeforeAll
+    static void startKafka() {
+        kafkaContainer.start();
+        System.setProperty("KAFKA_TESTE", kafkaContainer.getBootstrapServers());
+    }
+
+    @AfterAll
+    static void stopKafka() {
+        kafkaContainer.stop();
+    }
     @Autowired
     private MockMvc mockMvc;
 

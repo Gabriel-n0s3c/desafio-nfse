@@ -3,6 +3,7 @@ package com.desafio.nfse_api.feature.credito.service;
 import com.desafio.nfse_api.feature.credito.dto.CreditoResponseDTO;
 import com.desafio.nfse_api.feature.credito.entity.Credito;
 import com.desafio.nfse_api.feature.credito.mapper.CreditoMapper;
+import com.desafio.nfse_api.feature.credito.producer.CreditoRequestProducer;
 import com.desafio.nfse_api.feature.credito.repository.CreditoRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -29,6 +30,9 @@ class CreditoServiceTest {
 
     @InjectMocks
     private CreditoService creditoService;
+
+    @Mock
+    private CreditoRequestProducer creditoRequestProducer;
 
     @BeforeEach
     void setUp() {
