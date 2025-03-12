@@ -34,7 +34,7 @@ Antes de iniciar, certifique-se de ter instalado:
 Crie um arquivo `.env` na raiz do projeto, onde se encontra o arquivo `docker-compose.yml`, e configure as seguintes variáveis:
 
 ```ini
-DB_URL=url do banco ex: `jdbc:mariadb://mariadb:3306/nfse_db`
+DB_URL=url do banco ex: `jdbc:mariadb://host.docker.internal:3306/desafio_nfse_db`
 DB_USER=root
 DB_PASSWORD="" 
 KAFKA_SERVER=kafka:29092
